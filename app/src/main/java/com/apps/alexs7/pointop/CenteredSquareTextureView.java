@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.TextureView;
+import android.view.View;
 
 /**
  * Created by alex on 25/07/15.

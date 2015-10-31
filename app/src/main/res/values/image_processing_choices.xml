@@ -6,10 +6,12 @@
         <item>Default Preview</item>
         <item>Greyscale</item>
         <item>Black And White</item>
-        <item>Random Matrix</item>
-        <item>Simple Averaging Operator</item>
+        <!--<item>Random Matrix</item>-->
+        <item>Median 3x3 Template</item>
         <item>Edge Detection</item>
-        <item>Rotation</item>
+        <!--<item>Rotation</item>-->
         <item>2D Fourier Transform</item>
+        <item>OpenCV Test</item>
+        <item>Adaptive Thresholding</item>
     </string-array>
 </resources>

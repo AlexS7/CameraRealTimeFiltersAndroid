@@ -23,14 +23,21 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignBottom="@id/center_dummy_view"
-            android:background="@color/DeepSkyBlue"/>
+            android:background="@color/LightGrey"/>
 
-        <ListView
+        <FrameLayout
+            android:id="@+id/options_view_pager_fragment_container"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/lvImageProcessChoices"
             android:layout_alignTop="@id/center_dummy_view"
-            android:background="@color/DeepSkyBlue"/>
+            android:background="@color/LightGrey"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/listOptionsRecyclerView"
+            android:layout_alignTop="@id/center_dummy_view"
+            android:background="@color/LightGrey"/>
 
     </RelativeLayout>
 
@@ -39,7 +46,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:background="@color/Black"/>
+        android:background="@color/LightGrey"/>
 
 </LinearLayout>
 

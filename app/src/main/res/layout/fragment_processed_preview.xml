@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.apps.alexs7.pointop.ProcessedPreviewFragment">
+    tools:context="com.apps.alexs7.pointop.fragments.ProcessedPreviewFragment">
 
     <ImageView
         android:id="@+id/processed_preview_img_view"
+        android:background="@color/WhiteSmoke"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 </RelativeLayout>

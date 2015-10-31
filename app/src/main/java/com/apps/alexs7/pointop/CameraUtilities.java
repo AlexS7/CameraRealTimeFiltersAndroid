@@ -54,4 +54,11 @@ public class CameraUtilities {
         }
         return false;
     }
+
+    public static Camera releaseCamera(Camera mCamera) {
+        mCamera.stopPreview();
+        mCamera.release();
+        mCamera = null;
+        return mCamera;
+    }
 }

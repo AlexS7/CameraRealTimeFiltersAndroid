@@ -12,11 +12,13 @@
         android:layout_height="0dp"
         android:layout_weight="3"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_height="0dp"
         android:layout_weight="2"
         android:layout_width="match_parent"
-        android:id="@+id/lvImageProcessChoices"/>
+        android:scrollbars="vertical"
+        android:background="@color/LightGrey"
+        android:id="@+id/listOptionsRecyclerView"/>
 
 </LinearLayout>
 

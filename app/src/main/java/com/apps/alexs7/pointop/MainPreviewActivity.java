@@ -1,18 +1,17 @@
 package com.apps.alexs7.pointop;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
+
+import com.apps.alexs7.pointop.fragments.CleanPreviewFragment;
+
+import org.opencv.android.OpenCVLoader;
 
 
 public class MainPreviewActivity extends Activity
@@ -20,6 +19,8 @@ public class MainPreviewActivity extends Activity
 
     private BProcessor bProcessor;
     private FragmentHelper fragmentHelper;
+    private UIHelper uiHelper;
+    private boolean processing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +28,30 @@ public class MainPreviewActivity extends Activity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_preview);
 
-        bProcessor = new BProcessor(this);
+        if(!OpenCVLoader.initDebug()){
+            Log.d("ERROR", "Unable to load OpenCV");
+        }
+        else{
+            Log.d("SUCCESS", "OpenCV loaded");
+        }
 
+        bProcessor = new BProcessor(this);
         fragmentHelper = new FragmentHelper(this);
+        uiHelper = new UIHelper(this,bProcessor);
+
         fragmentHelper.setupFragments();
-        UIHelper.buidListWithChoices(this, bProcessor);
+        uiHelper.buildListWithChoices();
+
+        Toast.makeText(getApplicationContext(),"Tap preview to switch cameras", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onCleanPreviewBitmapUpdated(Bitmap origBmp) {
         if(fragmentHelper.getProcessedPreviewFragment() != null) {
-            fragmentHelper.getProcessedPreviewFragment().setImageViewBitmap(
-                    bProcessor.processBitmap(origBmp)
-            );
+            if(!processing){
+                processing = true;
+                new ProcessBitmap().execute(origBmp);
+            }
         }
     }
 
@@ -49,6 +61,23 @@ public class MainPreviewActivity extends Activity
         setContentView(R.layout.activity_main_preview);
 
         fragmentHelper.setupFragments();
-        UIHelper.buidListWithChoices(this,bProcessor);
+        uiHelper.buildListWithChoices();
+    }
+
+    private class ProcessBitmap extends AsyncTask<Bitmap, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(Bitmap... bitmaps) {
+            Bitmap resultBitmap;
+            resultBitmap = bProcessor.processBitmap(bitmaps[0]);
+            return resultBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            processing = false;
+            fragmentHelper.getProcessedPreviewFragment().setImageViewBitmap(bitmap);
+            super.onPostExecute(bitmap);
+        }
     }
 }

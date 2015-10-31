@@ -29,7 +29,6 @@ public class EdgeDetection {
         mScript.set_width(width-1);
         mScript.set_height(height-1);
         mScript.set_inPixels(inAllocation);
-
         mScript.forEach_root(inAllocation,outAllocation);
 
         outAllocation.copyTo(origBmp);

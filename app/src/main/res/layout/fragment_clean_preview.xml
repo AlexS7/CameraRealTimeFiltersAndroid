@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.apps.alexs7.pointop.CleanPreviewFragment">
+    tools:context="com.apps.alexs7.pointop.fragments.CleanPreviewFragment">
 
     <com.apps.alexs7.pointop.CenteredSquareTextureView
         android:id="@+id/clean_preview_txview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="switchCameras"/>
 
 </RelativeLayout>
